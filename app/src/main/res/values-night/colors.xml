@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Screen chrome (dark / night) -->
+    <color name="window_background">#1F1F1F</color>
+    <color name="row_background">#363636</color>
+    <color name="search_bar_background">#2C2C2C</color>
+    <color name="text_primary">#E8E8E8</color>
+    <color name="text_secondary">#ABABAB</color>
+    <color name="icon_muted">#C8C8C8</color>
+</resources>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Screen chrome (light / day) -->
+    <color name="window_background">#EEEEEE</color>
+    <color name="row_background">#FAFAFA</color>
+    <color name="search_bar_background">#F1F3F4</color>
+    <color name="text_primary">#212121</color>
+    <color name="text_secondary">#757575</color>
+    <color name="icon_muted">#515151</color>
+
+    <!-- Row icon tile colors (same in both themes) -->
+    <color name="tile_battery">#258982</color>
+    <color name="tile_display">#FFA727</color>
+    <color name="tile_sound">#01B1AF</color>
+    <color name="tile_storage">#C14CE6</color>
+    <color name="tile_accessibility">#5011C1</color>
+    <color name="tile_system">#9E9E9E</color>
+    <color name="tile_about">#6F86DA</color>
+
+    <color name="white">#FFFFFF</color>
+</resources>
