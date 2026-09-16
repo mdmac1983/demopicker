@@ -3,10 +3,12 @@
     <!--
       Declaring a real adaptive icon (API 26+) stops the launcher from
       auto-wrapping our legacy icon in a padded white circle/square to
-      match other apps' adaptive icons. The foreground is the exact
-      uploaded asset, unscaled/uncropped by us; background is transparent
-      since the asset is already opaque edge-to-edge.
+      match other apps' adaptive icons. Background is a solid fill in the
+      asset's own teal so it reads as one seamless full-bleed tile; the
+      foreground is the exact uploaded asset, inset to the standard
+      adaptive icon proportions (see ic_launcher_foreground_inset.xml) so
+      the gear isn't oversized relative to every other icon.
     -->
-    <background android:drawable="@android:color/transparent" />
-    <foreground android:drawable="@mipmap/ic_launcher_foreground" />
+    <background android:drawable="@color/ic_launcher_background" />
+    <foreground android:drawable="@drawable/ic_launcher_foreground_inset" />
 </adaptive-icon>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  The uploaded icon asset fills its own canvas edge-to-edge, so used as a
+  raw adaptive-icon foreground at full bleed it renders the gear far
+  larger than a normal adaptive icon (measured ~94% of tile width vs the
+  ~65% that other properly-proportioned adaptive icons use). Insetting it
+  here shrinks the whole asset within the 108dp adaptive icon canvas; the
+  exposed edges are covered by the matching solid-teal background layer,
+  so the seam is invisible and the icon reads as a normal-sized gear
+  centered in a full-bleed teal tile - same asset, no crop, just scaled
+  down within the standard adaptive icon frame.
+-->
+<inset xmlns:android="http://schemas.android.com/apk/res/android"
+    android:drawable="@mipmap/ic_launcher_foreground"
+    android:insetLeft="18dp"
+    android:insetTop="18dp"
+    android:insetRight="18dp"
+    android:insetBottom="18dp" />
