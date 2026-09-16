@@ -33,6 +33,23 @@ and dark mode.
 - Theme follows the system day/night setting (`Theme.AppCompat.DayNight`);
   colors for both modes were sampled directly from the provided screenshots.
 
+## Renaming the app
+
+Android won't let an installed app rewrite its own manifest, so there's no
+way to type genuinely arbitrary text and have it show under the home-screen
+icon. Instead, **long-press the back arrow** at the top of the screen to
+open an "App name" picker with 8 pre-declared names: Settings, System,
+Tools, Files, Calendar, Calculator, Notes, Clock.
+
+Under the hood, each name is its own `<activity-alias>` in
+`AndroidManifest.xml`, all pointing at the same `MainActivity` and sharing
+the same icon. Picking a name disables the currently-enabled alias and
+enables the chosen one via
+`PackageManager.setComponentEnabledSetting(...)`, and remembers the choice
+in `SharedPreferences` so the picker shows the right selection next time.
+Most launchers pick up the new label immediately; some need a trip back to
+the home screen to refresh.
+
 ## Project layout
 
 Plain Gradle/AGP project (no decompiled smali, unlike the launcher repo):
@@ -53,3 +70,6 @@ app/src/main/res/mipmap-nodpi/      (exact app icon asset)
 ```
 
 Output APK: `app/build/outputs/apk/debug/app-debug.apk`.
+
+CI (`.github/workflows/build.yml`) runs the same `assembleDebug` on every
+push/PR to `main` and uploads the resulting APK as a build artifact.
