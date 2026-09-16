@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<adaptive-icon xmlns:android="http://schemas.android.com/apk/res/android">
+    <!--
+      Declaring a real adaptive icon (API 26+) stops the launcher from
+      auto-wrapping our legacy icon in a padded white circle/square to
+      match other apps' adaptive icons. The foreground is the exact
+      uploaded asset, unscaled/uncropped by us; background is transparent
+      since the asset is already opaque edge-to-edge.
+    -->
+    <background android:drawable="@android:color/transparent" />
+    <foreground android:drawable="@mipmap/ic_launcher_foreground" />
+</adaptive-icon>

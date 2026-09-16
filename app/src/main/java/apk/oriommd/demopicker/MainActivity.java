@@ -54,13 +54,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        View backButton = findViewById(R.id.button_back);
-        backButton.setOnClickListener(v -> finish());
-        backButton.setOnLongClickListener(v -> {
-            showRenameDialog();
-            return true;
-        });
-
         batterySubtitle = findViewById(R.id.text_battery_subtitle);
         storageSubtitle = findViewById(R.id.text_storage_subtitle);
 
@@ -71,7 +64,13 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.row_storage).setOnClickListener(openBlank);
         findViewById(R.id.row_accessibility).setOnClickListener(openBlank);
         findViewById(R.id.row_system).setOnClickListener(openBlank);
-        findViewById(R.id.row_about).setOnClickListener(openBlank);
+
+        View aboutRow = findViewById(R.id.row_about);
+        aboutRow.setOnClickListener(openBlank);
+        aboutRow.setOnLongClickListener(v -> {
+            showRenameDialog();
+            return true;
+        });
 
         updateStorageSubtitle();
     }
@@ -113,7 +112,7 @@ public class MainActivity extends AppCompatActivity {
         storageSubtitle.setText(getString(R.string.storage_used_format, used, total));
     }
 
-    /** Long-press the back button to pick which of the pre-declared launcher labels is shown. */
+    /** Long-press "About tablet" to pick which of the pre-declared launcher labels is shown. */
     private void showRenameDialog() {
         String[] labels = new String[ALIAS_SUFFIXES.length];
         for (int i = 0; i < ALIAS_SUFFIXES.length; i++) {

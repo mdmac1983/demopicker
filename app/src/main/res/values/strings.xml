@@ -3,10 +3,6 @@
     <!-- Label shown under the launcher icon once installed -->
     <string name="app_label">Settings</string>
 
-    <string name="search_hint">Search settings</string>
-    <string name="content_desc_back">Back</string>
-    <string name="content_desc_search">Search</string>
-
     <string name="row_battery_title">Battery</string>
     <string name="row_display_title">Display</string>
     <string name="row_display_subtitle">Brightness, sleep, font size</string>
