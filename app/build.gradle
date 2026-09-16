@@ -27,6 +27,16 @@ android {
     }
 }
 
+configurations.all {
+    // A transitive androidx dependency pulls an old kotlin-stdlib-jdk7/jdk8
+    // (1.6.21) whose classes now duplicate ones merged into kotlin-stdlib
+    // itself as of Kotlin 1.8+, which appcompat 1.7.0 also pulls in at a
+    // newer version. Drop the legacy split artifacts; kotlin-stdlib alone
+    // already provides everything they used to.
+    exclude group: "org.jetbrains.kotlin", module: "kotlin-stdlib-jdk7"
+    exclude group: "org.jetbrains.kotlin", module: "kotlin-stdlib-jdk8"
+}
+
 dependencies {
     implementation "androidx.appcompat:appcompat:1.7.0"
 }
