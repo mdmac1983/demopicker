@@ -1,5 +1,6 @@
 package apk.oriommd.demopicker;
 
+import android.content.ActivityNotFoundException;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
@@ -10,6 +11,7 @@ import android.os.BatteryManager;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.StatFs;
+import android.provider.Settings;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -57,16 +59,15 @@ public class MainActivity extends AppCompatActivity {
         batterySubtitle = findViewById(R.id.text_battery_subtitle);
         storageSubtitle = findViewById(R.id.text_storage_subtitle);
 
-        View.OnClickListener openBlank = v -> startActivity(new Intent(this, BlankActivity.class));
-        findViewById(R.id.row_battery).setOnClickListener(openBlank);
-        findViewById(R.id.row_display).setOnClickListener(openBlank);
-        findViewById(R.id.row_sound).setOnClickListener(openBlank);
-        findViewById(R.id.row_storage).setOnClickListener(openBlank);
-        findViewById(R.id.row_accessibility).setOnClickListener(openBlank);
-        findViewById(R.id.row_system).setOnClickListener(openBlank);
+        findViewById(R.id.row_battery).setOnClickListener(v -> openSystemScreen(Intent.ACTION_POWER_USAGE_SUMMARY));
+        findViewById(R.id.row_display).setOnClickListener(v -> openSystemScreen(Settings.ACTION_DISPLAY_SETTINGS));
+        findViewById(R.id.row_sound).setOnClickListener(v -> openSystemScreen(Settings.ACTION_SOUND_SETTINGS));
+        findViewById(R.id.row_storage).setOnClickListener(v -> openSystemScreen(Settings.ACTION_INTERNAL_STORAGE_SETTINGS));
+        findViewById(R.id.row_accessibility).setOnClickListener(v -> openSystemScreen(Settings.ACTION_ACCESSIBILITY_SETTINGS));
+        findViewById(R.id.row_system).setOnClickListener(v -> openSystemScreen(Settings.ACTION_SETTINGS));
 
         View aboutRow = findViewById(R.id.row_about);
-        aboutRow.setOnClickListener(openBlank);
+        aboutRow.setOnClickListener(v -> openSystemScreen(Settings.ACTION_DEVICE_INFO_SETTINGS));
         aboutRow.setOnLongClickListener(v -> {
             showRenameDialog();
             return true;
@@ -110,6 +111,19 @@ public class MainActivity extends AppCompatActivity {
         String used = String.format(Locale.US, "%.1f", usedBytes / BYTES_PER_GB);
         String total = String.format(Locale.US, "%.1f", totalBytes / BYTES_PER_GB);
         storageSubtitle.setText(getString(R.string.storage_used_format, used, total));
+    }
+
+    /**
+     * Opens a real system Settings screen. Some actions aren't available on every
+     * device/OS version, so a failure here falls back to the blank window rather
+     * than crashing - this can only affect our own launch, never the target app.
+     */
+    private void openSystemScreen(String action) {
+        try {
+            startActivity(new Intent(action));
+        } catch (ActivityNotFoundException e) {
+            startActivity(new Intent(this, BlankActivity.class));
+        }
     }
 
     /** Long-press "About tablet" to pick which of the pre-declared launcher labels is shown. */
